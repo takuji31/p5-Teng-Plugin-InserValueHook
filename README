@@ -1,0 +1,39 @@
+This is Perl module Teng::Plugin::InsertValueHook.
+
+INSTALLATION
+
+Type the following command:
+
+    $ curl -L http://cpanmin.us | perl - Teng::Plugin::InsertValueHook
+
+Or install cpanm and then run the following command to install
+Teng::Plugin::InsertValueHook:
+
+    $ cpanm Teng::Plugin::InsertValueHook
+
+If you get an archive of this distribution, unpack it and build it
+as per the usual:
+
+    $ tar xzf Teng-Plugin-InsertValueHook-$version.tar.gz
+    $ cd Teng-Plugin-InsertValueHook-$version
+    $ perl Build.PL
+    $ ./Build && ./Build test
+
+Then install it:
+
+    $ ./Build install
+
+DOCUMENTATION
+
+Teng::Plugin::InsertValueHook documentation is available as in POD. So you can do:
+
+    $ perldoc Teng::Plugin::InsertValueHook
+
+to read the documentation online with your favorite pager.
+
+LICENSE AND COPYRIGHT
+
+Copyright (c) 2012, Nishibayashi Takuji. All rights reserved.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
