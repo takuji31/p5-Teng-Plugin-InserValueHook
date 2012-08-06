@@ -1,9 +1,52 @@
 package Teng::Plugin::InsertValueHook;
-use 5.008_001;
 use strict;
 use warnings;
+use 5.010_001;
 
 our $VERSION = '0.01';
+
+use Class::Method::Modifiers qw/install_modifier/;
+
+our @EXPORT = qw//;
+
+sub init {
+    my ($class, $pkg) = @_;
+    if ($class eq $pkg) {
+        # XXX Avoid Teng plugin initialize bug
+        $pkg = caller(1);
+    }
+
+    my $modifiers = $class->modifiers;
+    for my $modifier (@$modifiers){
+        my $type = $modifier->{type};
+        my $name = $modifier->{name};
+        my $code = $modifier->{code};
+        my $cond = $modifier->{cond};
+        if (!defined $cond || $cond->($class, $pkg)) {
+            install_modifier $pkg, $type, $name, $code;
+        }
+    }
+}
+
+sub modifiers { die 'This method is abstract' }
+
+sub get_table_info {
+    my ($class, $teng, $table_name) = @_;
+
+    my $table = $teng->schema->get_table($table_name);
+
+    return unless $table;
+
+    return $table->columns;
+}
+
+sub find_column_and_insert_value {
+    my ($class, $columns, $row_data, $column_name, $value) = @_;
+
+    if (grep /^$column_name$/, @$columns) {
+        $row_data->{$column_name} //= $value;
+    }
+}
 
 
 1;
